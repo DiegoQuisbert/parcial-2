@@ -2,23 +2,31 @@ header {
   background-color: #121212;
 }
 
+.logo {
+  display: block;
+  width: 120px; /* Ajusta el tamaño del logo */
+  height: 40px;
+  background-image: url(../public/img/MovCrit.png); /* Ruta del logo */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .links {
   margin: 32px, 24px;
   display: flex;
   justify-content: space-evenly;
-}
-.links {
   color: #FFFFFF;
   letter-spacing: 2px;
   text-decoration: none;
   position: relative;
 }
 
-.links :hover {
-  color: green;
+.links:hover {
+  color: rgb(63, 138, 63);
 }
 
-.links :after {
+.links:after {
   content: "";
   position: absolute;
   right: 0;
@@ -26,14 +34,23 @@ header {
   left: 0;
   height: 2px;
   width: 100%;
-  background: green;
+  background: rgb(63, 138, 63);
   transform-origin: right;
   transform: scaleX(0);
   transition: transform 0.2s ease-in-out;
 }
-.links a:hover:after {
+
+.links:hover:after {
   transform-origin: left;
   transform: scaleX(1);
+}
+
+/* Mantener el color constante */
+.links:focus,
+.links:visited,
+.links:active {
+  color: #FFFFFF;
+  text-decoration: none;
 }
 
 .boton {

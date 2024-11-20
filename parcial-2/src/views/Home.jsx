@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Movies from "./Movies";
 
 const Home = () => {
 
@@ -45,6 +46,7 @@ const Home = () => {
                     </p>
                 </div>
             </div>
+
         </div>
     )
 }

@@ -8,16 +8,19 @@ const Movies = () => {
     useEffect(() => {
         console.log('Componente renderizado');
         const getMovies = async () => {
-            const resp = await fetch('http://localhost:3000/api/movies');
+            const endPoint = 'http://localhost:3000/api/movies'
+            const resp = await fetch(endPoint);
             const data = await resp.json();
             const dataMovies = data.map(movie => {
                 return {
                     id: movie._id,
                     nombre: movie.title,
+                    director: movie.director,
+                    genero: movie.genre,
+                    estreno: movie.premiere,
+                    duration: movie.duration,
                     sinopsis: movie.synopsis,
                     poster: movie.poster,
-                    genre: movie.genre,
-                    duration: movie.duration
                 };
             });
             console.log(dataMovies);
@@ -34,7 +37,7 @@ const Movies = () => {
     return (
         <div className='container'>
             <h3 className='text-center fw-bold mb-4'>Películas</h3>
-
+            
             <div className="row">
                 {
                     movie.map((movie) => (
@@ -42,6 +45,10 @@ const Movies = () => {
                             <MovieCard
                                 id={movie.id}
                                 titulo={movie.nombre}
+                                director={movie.director}
+                                estreno={movie.premiere}
+                                duracion={movie.duration}
+                                genero={movie.genre}
                                 texto={movie.sinopsis}
                                 poster={movie.poster}
                             />

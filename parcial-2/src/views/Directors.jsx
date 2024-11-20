@@ -17,6 +17,7 @@ const Directors = () => {
                     nombre: director.compName,
                     edad: director.age,
                     biografia: director.biography,
+                    foto: director.photo
                 };
             });
             console.log(dataDirectors);
@@ -40,6 +41,7 @@ const Directors = () => {
                         <div className="col-md-4" key={director.id}>
                             <DirectorCard
                                 id={director.id}
+                                foto={director.photo}
                                 nombre={director.nombre}
                                 edad={director.edad}
                                 biografia={director.biografia}
