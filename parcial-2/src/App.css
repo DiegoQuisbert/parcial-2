@@ -7,18 +7,18 @@ header {
   display: flex;
   justify-content: space-evenly;
 }
-.links a {
+.links {
   color: #FFFFFF;
   letter-spacing: 2px;
   text-decoration: none;
   position: relative;
 }
 
-.links a:hover {
+.links :hover {
   color: green;
 }
 
-.links a:after {
+.links :after {
   content: "";
   position: absolute;
   right: 0;
@@ -55,6 +55,105 @@ header {
   left: 0;
 }
 
+.cuadro {
+  border-radius: 15px; 
+  padding: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.cuadro:hover {
+  transform: scale(1.02);
+}
+
 body {
   background-color: #F4F4F4;
+}
+
+.movie-card {
+  width: 18rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f4f4f4;
+  overflow: hidden;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card .card-img-top {
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 2px solid #ddd;
+}
+
+.movie-card .card-body {
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.movie-card .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.movie-card .card-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.movie-card .btn {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.movie-card .btn:hover {
+  background-color: #0057b7;
+}
+
+/* Tarjeta de Director */
+.director-card {
+  width: 18rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.director-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.director-card .card-body {
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.director-card .card-body h4 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.director-card .card-body .card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.director-card .card-body .card-text:last-child {
+  font-size: 0.9rem;
+  color: #777;
 }

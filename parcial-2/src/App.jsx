@@ -1,5 +1,13 @@
 import './App.css'
-import Card from './components/Card';
+import Home from './views/Home';
+import Login from './views/Login';
+import Movies from './views/Movies'
+import Register from './views/Register';
+import Directors from './views/Directors'
+import NotFound from './views/NotFound';
+
+
+import {Routes, Route, NavLink, Link} from 'react-router-dom';
 
 function App() {
 
@@ -9,13 +17,13 @@ function App() {
         <nav className="navbar navbar-expand-lg py-4">
           <div className="container-fluid d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
-              <a className="navbar-brand" href="#">MovCrits</a>
+            <NavLink className="navbar-brand" to="/">MovCrits</NavLink>
               <ul className="navbar-nav ms-3 d-flex flex-row gap-3">
                 <li className="links nav-item">
-                  <a className="links nav-link" href="#">Películas</a>
+                  <NavLink className="links nav-link" to="/movies">Películas</NavLink>
                 </li>
                 <li className="links nav-item">
-                  <a className="nav-link" href="#">Directores</a>
+                  <NavLink className="links nav-link" to="/directors">Directores</NavLink>
                 </li>
               </ul>
             </div>
@@ -23,43 +31,26 @@ function App() {
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success boton" type="submit">Buscar</button>
             </form>
-            <a className="btn btn-outline-success boton" href="#">Iniciar Sesión</a>
+            <a className="btn btn-outline-success boton" href="#">Registrarse</a>
           </div>
         </nav>
 
       </header>
 
       <main>
-        <div className="row">
-          <div className="col-6 position-relative overflow-hidden">
-            <img
-              src="../public/img/fondo.png"
-              alt="Ejemplo"
-              className="fondo"
-            />
-          </div>
-          <div className="col-6 d-flex flex-column justify-content-center">
-            <h3 className="fw-bold">Hola</h3>
-            <p>¿Te gustaría leer opiniones de verdaderos espectadores en lugar de supuestos críticos o gente sobornada?, MovCrit es tu lugar, En nuestro sitio serás perfectamente capaz de reseñar tus películas favoritas mediante comentarios, ¡libre para todo el mundo!</p>
-            <p>Iniciá sesión ahora y compartinos tu opinión sobre cualquier pelícua</p>
-          </div>
-        </div>
 
-        <hr />
-        
-        <div className='container mt-2'>
-          <h3 className='text-center fw-bold'>Películas</h3>
-          <Card></Card>
-        </div>
-      
-        <div className='container mt-2'>
-          <h3 className='text-center fw-bold'>Directores</h3>
-          <Card></Card>
-        </div>
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/movies' element={<Movies/>} />
+      <Route path='/directors' element={<Directors/>} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/register' element={<Register/>} />
+      <Route path='*' element={ <NotFound/> }></Route>
+    </Routes>
 
+      <Movies />
+      <Directors/>
       </main>
-
-
 
     </>
   )
