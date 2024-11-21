@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
+    const [loading, setLoading] = useState(false);  // Estado para el botón de carga
+    const [error, setError] = useState(null);       // Estado para el error
+    const navigate = useNavigate();                 // Hook para redirigir
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -11,6 +14,9 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError(null);  // Limpiar cualquier error previo
+
         try {
             console.log("Login data:", formData);
 
@@ -25,8 +31,7 @@ const Login = () => {
 
             const response = await fetch(endPoint, config);
             if (!response.ok) {
-                console.error("Error en el login:", response);
-                return;
+                throw new Error("Error en el login");
             }
 
             const data = await response.json();
@@ -35,14 +40,17 @@ const Login = () => {
             if (data?.data?.jwt) {
                 localStorage.setItem("token", data.data.jwt);
                 console.log("Token guardado en localStorage:", data.data.jwt);
+
+                // Redirigir al usuario después de iniciar sesión exitosamente
+                navigate("/movies");
             }
 
-            setFormData({
-                email: "",
-                password: "",
-            });
+            setFormData({ email: "", password: "" });
         } catch (error) {
             console.error("Error al intentar loguear:", error);
+            setError("Credenciales incorrectas, por favor intente nuevamente.");
+        } finally {
+            setLoading(false);  // Rehabilitar el botón una vez se complete la solicitud
         }
     };
 
@@ -53,6 +61,8 @@ const Login = () => {
                     <h2 className="text-center mb-5 fw-bold">Iniciar sesión</h2>
                     <div className="border rounded shadow-sm overflow-hidden">
                         <form onSubmit={handleSubmit} className="p-4 p-xl-5">
+                            {error && <div className="alert alert-danger">{error}</div>} {/* Mostrar el mensaje de error */}
+                            
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">
                                     Email
@@ -95,8 +105,12 @@ const Login = () => {
                             </div>
 
                             <div className="d-grid mb-3">
-                                <button className="btn btn-success boton" type="submit">
-                                    Iniciar sesión
+                                <button
+                                    className="btn btn-success boton"
+                                    type="submit"
+                                    disabled={loading} // Deshabilitar mientras se procesa
+                                >
+                                    {loading ? "Cargando..." : "Iniciar sesión"}
                                 </button>
                             </div>
                             <div className="d-grid">
