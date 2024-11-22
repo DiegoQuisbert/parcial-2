@@ -1,0 +1,20 @@
+El login, de momento funciona perfectamente (hasta te da un token en la consola), pero que sirva como un estado, cosa de que al estar logeado únicamente salga un botón de logout en el header que dice "registrarse"
+
+Una función de búsqueda, osea que la barra de búsqueda del nav se pueda usar para buscar películas por su nombre (para eso tenemos la función en el controller supongo)
+
+Y que en la vista de películas, al estar logeado pueda mandar una review en la peli  por favor ayudame a realizarlas funciones
+
+$ git commit -m "realizamos las funciones de modificar el header y el login habilitar la busqueda por el navegador para que aparecan los datos de las peliculas en la vista correspondiente (Movie) y tambien implementamos la funcion de reviews cuando alguien se loguea"
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <>) not allowed
