@@ -25,7 +25,7 @@ const Movie = () => {
             <div className="row">
                 <div className="col-md-5">
                     <img
-                        src={movie.poster}
+                        src={`http://localhost:3000${movie.poster}`}
                         className="img-fluid rounded-start border-end"
                         alt={`Poster de ${movie.title}`}
                     />

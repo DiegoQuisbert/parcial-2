@@ -41,7 +41,7 @@ const Directors = () => {
                         <div className="col-md-4" key={director.id}>
                             <DirectorCard
                                 id={director.id}
-                                foto={director.photo}
+                                foto={director.foto}
                                 nombre={director.nombre}
                                 edad={director.edad}
                                 biografia={director.biografia}

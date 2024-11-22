@@ -7,6 +7,7 @@ import Director from './views/Director'
 import Register from './views/Register';
 import Directors from './views/Directors'
 import NotFound from './views/NotFound';
+import Profile from './views/Profile';
 
 
 import { Routes, Route, NavLink, Link } from 'react-router-dom';
@@ -48,7 +49,10 @@ function App() {
             </form>
 
             {isLoggedIn ? (
+              <>
               <button className='btn btn-outline-danger boton' onClick={handleLogout}>Logout</button>
+              <NavLink className='btn btn-success boton' to="/profile">Mi perfil</NavLink>
+              </>
             ) : (
               <>
               <NavLink className="btn btn-outline-success boton" to="/login">Login</NavLink>
@@ -70,6 +74,7 @@ function App() {
           <Route path='/directors/:id' element={<Director />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/profile' element={<Profile />}></Route>
           <Route path='*' element={<NotFound />}></Route>
         </Routes>
 

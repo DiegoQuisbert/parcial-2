@@ -8,7 +8,7 @@ function DirectorCard(props) {
             <div className="text-center">
                 <img
                     className='card-img-top rounded-circle w-25'
-                    src={props.photo}
+                    src={`http://localhost:3000${props.foto}`}
                     alt={`foto de ${props.nombre}`}
                 />
             </div>

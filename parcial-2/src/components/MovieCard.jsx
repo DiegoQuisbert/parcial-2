@@ -8,7 +8,7 @@ function MovieCard(props) {
             <div className='text-center'>
                 <img
                     className='card-img-top'
-                    src={props.poster}
+                    src={`http://localhost:3000${props.poster}` }
                     alt={`Poster de ${props.titulo}`}
                 />
             </div>

@@ -97,7 +97,7 @@ const Login = () => {
                             </div>
 
                             <div className="d-grid mb-3">
-                                <NavLink className="btn btn-success me-2 boton" type="submit">
+                                <NavLink className="btn btn-success me-2 boton" type="submit" to="/home">
                                     Iniciar sesión
                                 </NavLink>
                             </div>
