@@ -32,8 +32,6 @@ const Home = () => {
             <div className="container-fluid">
                 <img />
                 <div className="">
-                    <h2 className="fw-bold text-center"> hola </h2>
-                    <p className="text-center">hola</p>
                 </div>
 
             </div>

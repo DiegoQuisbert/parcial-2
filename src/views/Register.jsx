@@ -1,30 +1,56 @@
 import { useState } from "react";
-import {Routes, Route, NavLink, Link} from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
 
 const Register = () => {
-
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+    const [errors, setErrors] = useState({});
 
-    const HandlerChange = (event) => {
-        const { name, value } = event.target
+    const validate = () => {
+        const newErrors = {};
 
-        setFormData({ ...formData, [name]: value })
-    }
+        if (!formData.name.trim()) {
+            newErrors.name = "El nombre es obligatorio.";
+        } else if (formData.name.length < 5) {
+            newErrors.name = "El nombre debe tener al menos 5 caracteres.";
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email.trim()) {
+            newErrors.email = "El email es obligatorio.";
+        } else if (!emailRegex.test(formData.email)) {
+            newErrors.email = "El email no es válido.";
+        }
+
+        if (!formData.password) {
+            newErrors.password = "La contraseña es obligatoria.";
+        } else if (formData.password.length < 6) {
+            newErrors.password = "La contraseña debe tener al menos 6 caracteres.";
+        }
+
+        return newErrors;
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+        setErrors({ ...errors, [name]: "" });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            console.log(formData);
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
 
-            const endPoint = "http://localhost:3000/api/users/"
+        try {
+            const endPoint = "http://localhost:3000/api/users/";
             const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
-                body: JSON.stringify(formData)
-            }
+                body: JSON.stringify(formData),
+            };
 
             const response = await fetch(endPoint, config);
             if (!response.ok) {
@@ -32,58 +58,76 @@ const Register = () => {
             }
 
             const data = await response.json();
-
             console.log(data);
 
-            setFormData({
-                name: '',
-                email: '',
-                password: '',
-            })
+            setFormData({ name: '', email: '', password: '' });
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
-    }
+    };
 
     return (
         <div className="container">
             <div className="row my-5 justify-content-center">
-                <div className="col-12 col-md-10 col-lg-8 col-x1-7 col-xxl-6">
+                <div className="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
                     <h2 className="text-center mb-5 fw-bold">Registrar usuario</h2>
                     <div className="border rounded shadow-sm overflow-hidden">
                         <form onSubmit={handleSubmit} className="p-4 p-xl-5">
                             <div className="mb-3">
-                                <label htmlFor="" className="form-label" >Email</label>
-                                <div className="input-group">
-                                    <span className="input-group-text">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope" viewBox="0 0 16 16">
-                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                                        </svg>
-                                    </span>
-                                    <input className="form-control" type="text" name="email" onChange={HandlerChange} value={formData.email} required />
-                                </div>
+                                <label htmlFor="email" className="form-label">Email</label>
+                                <input
+                                    id="email"
+                                    className="form-control"
+                                    type="text"
+                                    name="email"
+                                    onChange={handleChange}
+                                    value={formData.email}
+                                    autoComplete="email"
+                                />
+                                {errors.email && <small className="text-danger">{errors.email}</small>}
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="" className="form-label" >Nombre</label>
-                                <input className="form-control" type="text" name="name" onChange={HandlerChange} value={formData.nombre} required/>
+                                <label htmlFor="name" className="form-label">Nombre</label>
+                                <input
+                                    id="name"
+                                    className="form-control"
+                                    type="text"
+                                    name="name"
+                                    onChange={handleChange}
+                                    value={formData.name}
+                                    autoComplete="name"
+                                />
+                                {errors.name && <small className="text-danger">{errors.name}</small>}
                             </div>
                             <div className="mb-4">
-                                <label className="form-label" htmlFor="">Contraseña</label>
-                                <input className="form-control" type="password" name="password" onChange={HandlerChange} value={formData.password} required/>
+                                <label htmlFor="password" className="form-label">Contraseña</label>
+                                <input
+                                    id="password"
+                                    className="form-control"
+                                    type="password"
+                                    name="password"
+                                    onChange={handleChange}
+                                    value={formData.password}
+                                    autoComplete="new-password"
+                                />
+                                {errors.password && <small className="text-danger">{errors.password}</small>}
                             </div>
 
+
                             <div className="d-grid mb-3">
-                                <button className="btn btn-success boton" type="submit">Registrarse</button>
+                                <button className="btn btn-success" type="submit">
+                                    Registrarse
+                                </button>
                             </div>
                             <div className="d-grid">
-                                <NavLink className="btn btn-dark btn-lg boton" to="/login">Login</NavLink>
+                                <NavLink className="btn btn-dark" to="/login">Login</NavLink>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Register;
