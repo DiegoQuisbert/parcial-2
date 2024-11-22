@@ -13,7 +13,7 @@ const Movie = () => {
         };
 
         getMovieById();
-        }, [id]);
+    }, [id]);
 
     if (!movie) {
         return <p>Cargando...</p>;
@@ -42,6 +42,18 @@ const Movie = () => {
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div className="container">
+                <h2>Reseñas:</h2>
+                    <ul className="list-group m-3">
+                        <li className="list-group-item">
+
+                        </li>
+                        <li className="list-group-item">
+
+                        </li>
+                    </ul>
             </div>
         </div>
     );

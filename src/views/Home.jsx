@@ -1,26 +1,8 @@
 import { useState, useEffect } from "react";
-import Movies from "./Movies";
 
 const Home = () => {
 
     let [recargar, setRecargar] = useState(false);
-    let [movie, setMovies] = useState([]);
-
-    useEffect(() => {
-        console.log('Componente renderizado');
-        const getMovies = async () => {
-            const resp = await fetch('http://localhost:3000/api/movies')
-            const data = await resp.json();
-            const dataMovies = data.map(movie => {
-                return { id: movie._id, nombre: movie.title, sinopsis: movie.synopsis, poster: movie.poster, genre: movie.genre, duration: movie.duration };
-            });
-            console.log(dataMovies);
-            setMovies(dataMovies);
-        }
-
-        getMovies();
-
-    }, [recargar]);
 
     const iniciarRecarga = () => {
         setRecargar(!recargar);
@@ -47,6 +29,14 @@ const Home = () => {
                 </div>
             </div>
 
+            <div className="container-fluid">
+                <img />
+                <div className="">
+                    <h2 className="fw-bold text-center"> hola </h2>
+                    <p className="text-center">hola</p>
+                </div>
+
+            </div>
         </div>
     )
 }

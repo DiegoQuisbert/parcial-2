@@ -35,6 +35,8 @@ const Login = () => {
             if (data?.data?.jwt) {
                 localStorage.setItem("token", data.data.jwt);
                 console.log("Token guardado en localStorage:", data.data.jwt);
+
+                Navigate("/");
             }
 
             setFormData({
@@ -95,9 +97,9 @@ const Login = () => {
                             </div>
 
                             <div className="d-grid mb-3">
-                                <button className="btn btn-success boton" type="submit">
+                                <NavLink className="btn btn-success me-2 boton" type="submit">
                                     Iniciar sesión
-                                </button>
+                                </NavLink>
                             </div>
                             <div className="d-grid">
                                 <NavLink className="btn btn-dark btn-lg boton" to="/register">

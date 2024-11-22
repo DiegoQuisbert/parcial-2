@@ -48,7 +48,7 @@ const Movies = () => {
                                 director={movie.director}
                                 estreno={movie.premiere}
                                 duracion={movie.duration}
-                                genero={movie.genre}
+                                genero={movie.genero}
                                 texto={movie.sinopsis}
                                 poster={movie.poster}
                             />

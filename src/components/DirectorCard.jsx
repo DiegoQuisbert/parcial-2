@@ -4,7 +4,7 @@ import '../App.css';
 
 function DirectorCard(props) {
     return (
-        <div className='card director-card mb-2'>
+        <div className='d-flex align-items-center card director-card mb-2'>
             <div className="text-center">
                 <img
                     className='card-img-top rounded-circle w-25'

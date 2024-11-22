@@ -10,8 +10,21 @@ import NotFound from './views/NotFound';
 
 
 import { Routes, Route, NavLink, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  }
 
   return (
     <>
@@ -33,7 +46,15 @@ function App() {
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success boton" type="submit">Buscar</button>
             </form>
-            <NavLink className="btn btn-outline-success boton" to="/register">Registrarse</NavLink>
+
+            {isLoggedIn ? (
+              <button className='btn btn-outline-danger boton' onClick={handleLogout}>Logout</button>
+            ) : (
+              <>
+              <NavLink className="btn btn-outline-success boton" to="/login">Login</NavLink>
+              <NavLink className="btn btn-outline-success boton" to="/register">Registrarse</NavLink>
+              </>
+            )}
           </div>
         </nav>
       </header>
