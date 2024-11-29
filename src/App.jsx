@@ -9,11 +9,21 @@ import Directors from './views/Directors'
 import NotFound from './views/NotFound';
 import Profile from './views/Profile';
 
+import Private from './views/Private';
+
+import { AuthProvider } from './utils/AuthContext';
+
+
+import { PrivateRoute } from './utils/PrivateRoute';
 
 import { Routes, Route, NavLink, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+const [token, setToken] = useState( localStorage.getItem('token') );
 
 function App() {
+
+  const { logout } = useContext(AuthContext);
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -23,8 +33,7 @@ function App() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
+    logout();
   }
 
   return (
@@ -40,6 +49,9 @@ function App() {
                 </li>
                 <li className="links nav-item">
                   <NavLink className="links nav-link" to="/directors">Directores</NavLink>
+                </li>
+                <li className='links nav-item'>
+                  <NavLink className="links nav-link" to="/private">Admin ?</NavLink>
                 </li>
               </ul>
             </div>
@@ -65,18 +77,30 @@ function App() {
 
 
       <main>
-
+      <AuthProvider>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/private' element={
+          <PrivateRoute>
+            <Private/>
+          </PrivateRoute>
+          }
+          />
           <Route path='/movies' element={<Movies />} />
           <Route path='/movies/:id' element={<Movie />} />
           <Route path='/directors' element={<Directors />} />
           <Route path='/directors/:id' element={<Director />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/profile' element={<Profile />}></Route>
+          <Route path='/profile' element={
+            <PrivateRoute>
+            <Profile/>
+            </PrivateRoute>
+            } 
+          />
           <Route path='*' element={<NotFound />}></Route>
         </Routes>
+      </AuthProvider>
 
       </main>
 

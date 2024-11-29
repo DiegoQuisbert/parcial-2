@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { NavLink, useInRouterContext} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../utils/AuthContext";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const { login } = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -15,8 +17,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        setError(null);
 
         try {
             const endPoint = "http://localhost:3000/api/users/login";
@@ -35,15 +35,15 @@ const Login = () => {
 
             const data = await response.json();
 
-            if (data?.data?.jwt) {
-                localStorage.setItem("token", data.data.jwt);
-                setIsLoggedIn(true);
-                navigate("/movies");
+            if(data.data.jwt) {
+                login('ok', data.data.jwt);
+                navigate('/')
+            }else{
+                console.log('credenciales erróneas');
             }
+
         } catch (error) {
-            setError("Credenciales incorrectas, por favor intente nuevamente.");
-        } finally {
-            setLoading(false);
+            console.log("Credenciales incorrectas, por favor intente nuevamente.");
         }
     };
 
@@ -54,7 +54,6 @@ const Login = () => {
                     <h2 className="text-center mb-5 fw-bold">Iniciar sesión</h2>
                     <div className="border rounded shadow-sm overflow-hidden">
                         <form onSubmit={handleSubmit} className="p-4 p-xl-5">
-                            {error && <div className="alert alert-danger">{error}</div>}
 
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">
@@ -91,9 +90,8 @@ const Login = () => {
                                 <button
                                     className="btn btn-success boton"
                                     type="submit"
-                                    disabled={loading}
                                 >
-                                    {loading ? "Cargando..." : "Iniciar sesión"}
+                                    login
                                 </button>
                             </div>
                             <div className="d-grid">
