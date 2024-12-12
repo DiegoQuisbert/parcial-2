@@ -1,23 +1,27 @@
+import ReviewCard from "../components/ReviewCard";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const Movie = () => {
     const { id } = useParams();
-    const [movie, setMovie] = useState(null);
+    const [movieData, setMovieData] = useState(null);
+    const userId = "id-del-usuario-autenticado"; // Debes obtener esto de tu sistema de autenticación.
 
     useEffect(() => {
         const getMovieById = async () => {
             const resp = await fetch(`http://localhost:3000/api/movies/${id}`);
             const data = await resp.json();
-            setMovie(data);
+            setMovieData(data.data);
         };
 
         getMovieById();
     }, [id]);
 
-    if (!movie) {
-        return <p>Cargando...</p>;
+    if (!movieData) {
+        return <p>No se encontró la película</p>;
     }
+
+    const { movie, reviews } = movieData;
 
     return (
         <div className="container">
@@ -44,17 +48,7 @@ const Movie = () => {
                 </div>
             </div>
 
-            <div className="container">
-                <h2>Reseñas:</h2>
-                    <ul className="list-group m-3">
-                        <li className="list-group-item">
-
-                        </li>
-                        <li className="list-group-item">
-
-                        </li>
-                    </ul>
-            </div>
+            <ReviewCard reviews={reviews} movieId={movie._id} userId={userId} />
         </div>
     );
 };
