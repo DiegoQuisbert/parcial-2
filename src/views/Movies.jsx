@@ -30,12 +30,9 @@ const Movies = () => {
         getMovies();
     }, [recargar]);
 
-    const iniciarRecarga = () => {
-        setRecargar(!recargar);
-    };
 
     return (
-        <div className='container'>
+        <div className='container mt-4'>
             <h3 className='text-center fw-bold mb-4'>Películas</h3>
             
             <div className="row">

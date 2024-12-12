@@ -4,10 +4,6 @@ const Home = () => {
 
     let [recargar, setRecargar] = useState(false);
 
-    const iniciarRecarga = () => {
-        setRecargar(!recargar);
-    }
-
     return (
         <div className="container-fluid mb-4">
             <div className="row mx-0">
@@ -28,6 +24,8 @@ const Home = () => {
                     </p>
                 </div>
             </div>
+
+            
 
             <div className="container-fluid">
                 <img />

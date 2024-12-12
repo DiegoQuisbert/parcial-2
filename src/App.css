@@ -1,5 +1,5 @@
 header {
-  background-color: #121212;
+  background-color: #121213;
 }
 
 .logo {
@@ -55,7 +55,6 @@ header {
 .boton {
   transition: transform 0.2s;
   color: #FFFFFF;
-  border-color: #FFFFFF;
 }
 
 .boton:hover {

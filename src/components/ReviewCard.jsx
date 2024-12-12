@@ -4,6 +4,7 @@ import '../App.css';
 function ReviewCard({ reviews, movieId, userId }) {
     const [reviewText, setReviewText] = useState('');
     const [error, setError] = useState('');
+    const [localReviews, setLocalReviews] = useState(reviews);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,7 +35,10 @@ function ReviewCard({ reviews, movieId, userId }) {
             }
 
             const data = await response.json();
-            setReviewText('');
+            setReviewText(''); 
+
+            setLocalReviews([data.data, ...localReviews]); 
+
         } catch (error) {
             setError(error.message);
         }
@@ -63,8 +67,8 @@ function ReviewCard({ reviews, movieId, userId }) {
 
             <div className="card-body">
                 <ul className="list-group m-3">
-                    {reviews && reviews.length > 0 ? (
-                        reviews.map((review) => (
+                    {localReviews && localReviews.length > 0 ? (
+                        localReviews.map((review) => (
                             <li key={review._id} className="list-group-item">
                                 <h5 className="card-title">{review.user.name}:</h5>
                                 <p className="card-text mt-2">{review.review}</p>

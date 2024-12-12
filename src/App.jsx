@@ -9,8 +9,6 @@ import Directors from './views/Directors';
 import NotFound from './views/NotFound';
 import Profile from './views/Profile';
 
-import Private from './views/Private';
-
 import { AuthProvider, AuthContext } from './utils/AuthContext';
 import { PrivateRoute } from './utils/PrivateRoute';
 import { Routes, Route, NavLink } from 'react-router-dom';
@@ -32,21 +30,14 @@ function AppContent() {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ms-3 d-flex flex-row gap-3">
                   <li className="links nav-item">
-                    <NavLink className="links nav-link" to="/movies">Películas</NavLink>
+                    <NavLink className="links" to="/movies">Películas</NavLink>
                   </li>
                   <li className="links nav-item">
-                    <NavLink className="links nav-link" to="/directors">Directores</NavLink>
-                  </li>
-                  <li className='links nav-item'>
-                    <NavLink className="links nav-link" to="/private">Admin ?</NavLink>
+                    <NavLink className="links" to="/directors">Directores</NavLink>
                   </li>
                 </ul>
               </div>
             </div>
-            <form className="d-flex mx-auto" role="search">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success boton" type="submit">Buscar</button>
-            </form>
 
             <div className="d-flex align-items-center gap-3">
               {token ? (
@@ -67,11 +58,6 @@ function AppContent() {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/private' element={
-            <PrivateRoute>
-              <Private />
-            </PrivateRoute>
-          } />
           <Route path='/movies' element={<Movies />} />
           <Route path='/movies/:id' element={<Movie />} />
           <Route path='/directors' element={<Directors />} />

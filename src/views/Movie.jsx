@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const Movie = () => {
     const { id } = useParams();
     const [movieData, setMovieData] = useState(null);
-    const userId = "id-del-usuario-autenticado"; // Debes obtener esto de tu sistema de autenticación.
+    const userId = "user-id";
 
     useEffect(() => {
         const getMovieById = async () => {
