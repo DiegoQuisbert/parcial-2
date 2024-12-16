@@ -1,13 +1,12 @@
 import React from 'react';
 import '../App.css';
 
-
 function DirectorCard(props) {
     return (
         <div className='d-flex align-items-center card director-card mb-2'>
             <div className="text-center">
                 <img
-                    className='card-img-top rounded-circle w-25'
+                    className='card-img-top rounded-circle director-photo'
                     src={`http://localhost:3000${props.foto}`}
                     alt={`foto de ${props.nombre}`}
                 />
